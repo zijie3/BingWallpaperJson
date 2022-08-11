@@ -32,7 +32,7 @@ jobs:
       uses: ad-m/github-push-action@v0.6.0
       with:
          github_token: ${{ secrets.WALLPAPER_ACTION_TOKEN }}
-         branch: mainin
+         branch: main
 
 
     
