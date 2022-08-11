@@ -25,6 +25,7 @@ jobs:
          git config --local user.name "Zijie Liu"
          git add .
          git commit -m "Update json"
+         git pull --rebase origin main
          git push origin main
 
     
