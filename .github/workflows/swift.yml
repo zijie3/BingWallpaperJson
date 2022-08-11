@@ -13,6 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+         github_token: ${{ secrets.WALLPAPER_ACTION_TOKEN }}
+         branch: main
     - name: Run
       run: swift run
       
@@ -23,7 +26,5 @@ jobs:
          git add .
          git commit -m "Update json"
          git push origin HEAD:main
-      with:
-         github_token: ${{ secrets.WALLPAPER_ACTION_TOKEN }}
-         branch: main
+
     
