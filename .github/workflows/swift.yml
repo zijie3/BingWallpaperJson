@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
          github_token: ${{ secrets.WALLPAPER_ACTION_TOKEN }}
          branch: main
@@ -21,11 +21,10 @@ jobs:
       
     - name: Commit files
       run: |
-         git remote add origin git@github.com:zijie3/BingWallpaperJson.git
          git config --local user.email "jie_liu3@icloud.com"
          git config --local user.name "Zijie Liu"
          git add .
          git commit -m "Update json"
-         git push origin main --force
+         git push origin main
 
     
