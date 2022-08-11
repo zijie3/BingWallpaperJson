@@ -1,14 +1,16 @@
 import Foundation
 
-let sourceURI = "https://www.bing.com" + "/HPImageArchive.aspx"
+
 
 struct BingWallpaperDownloader {
+    
+    private let sourceURI = "https://www.bing.com" + "/HPImageArchive.aspx"
     
     private init(){ }
     
     static let shared = BingWallpaperDownloader()
     
-    func getBingWallpaperRequest(index: Int, count: Int, market: Market) -> URLRequest {
+    private func getBingWallpaperRequest(index: Int, count: Int, market: Market) -> URLRequest {
         let sourceURI = sourceURI
         let index = min(max(0, index), 8)
         let count = min(max(0, count), 8)
@@ -18,7 +20,7 @@ struct BingWallpaperDownloader {
         return request
     }
     
-    func getBingWallpaperResponse(with request: URLRequest, handler: @escaping (String) -> Void) {
+    private func getBingWallpaperResponse(with request: URLRequest, handler: @escaping (String) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             let jsonString = String(data: data!, encoding: .utf8) ?? ""
             handler(jsonString)
@@ -49,7 +51,7 @@ struct BingWallpaperDownloader {
         group.wait()
     }
     
-    func append(for jsonString: String, with fileName: String) throws {
+    private func append(for jsonString: String, with fileName: String) throws {
         let str = jsonString + ",\n]"
         let pathString = FileManager.default.currentDirectoryPath
         let url = URL(string: pathString)!.appendingPathComponent("json/\(fileName)")
@@ -59,7 +61,7 @@ struct BingWallpaperDownloader {
 }
 
 
-extension String {
+fileprivate extension String {
     func appendLineToURL(fileURL: URL) throws {
         try (self + "\n").appendToURL(fileURL: fileURL)
     }
@@ -70,7 +72,7 @@ extension String {
     }
 }
 
-extension Data {
+fileprivate extension Data {
     func append(fileURL: URL) throws {
         if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
             defer {

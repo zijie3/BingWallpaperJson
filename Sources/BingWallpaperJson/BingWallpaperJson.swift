@@ -5,8 +5,7 @@ public struct BingWallpaperJson {
     
     
     public static func main() {
-        let downloader = BingWallpaperDownloader.shared
-        downloader.fetchAllCountriesJson()
+        BingWallpaperDownloader.shared.fetchAllCountriesJson()
         
     }
 }
