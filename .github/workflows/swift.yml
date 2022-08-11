@@ -21,8 +21,8 @@ jobs:
       
     - name: Commit files
       run: |
-         git config --local user.email "jie_liu3@icloud.com"
-         git config --local user.name "Zijie Liu"
+         git config --global user.email "jie_liu3@icloud.com"
+         git config --global user.name "Zijie Liu"
          git add .
          git commit -m "Update json"
          git pull --rebase origin main
