@@ -1,0 +1,28 @@
+name: Swift
+
+on:
+  schedule:
+    - cron:  '0 17 * * *'
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run
+      run: swift run
+      
+    - name: Commit files
+      run: |
+         git config --local user.email "jie_liu3@icloud.com"
+         git config --local user.name "Zijie Liu"
+         git add .
+         git commit -m "update Json"
+    - name: Push changes
+      uses:  ad-m/github-push-action@master
+      with:
+         github_token: ${{ secrets.WALLPAPER_ACTION_TOKEN }}
+         branch: main
+    
