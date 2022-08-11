@@ -4,9 +4,9 @@ import Foundation
 public struct BingWallpaperJson {
     
     
-    public static func main() async {
+    public static func main() {
         let downloader = BingWallpaperDownloader.shared
-        await downloader.fetchAllCountriesJson()
+        downloader.fetchAllCountriesJson()
         
     }
 }

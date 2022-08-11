@@ -18,7 +18,7 @@ struct BingWallpaperDownloader {
         return request
     }
     
-    func getBingWallpaperResponse(with request: URLRequest, handler: (String) -> Void) {
+    func getBingWallpaperResponse(with request: URLRequest, handler: @escaping (String) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             let jsonString = String(data: data!, encoding: .utf8) ?? ""
             handler(jsonString)
@@ -56,33 +56,35 @@ struct BingWallpaperDownloader {
         let fileUrl = URL(string: "file://\(url)")!
         try str.appendLineToURL(fileURL: fileUrl)
     }
-    
-    
-    extension String {
-        func appendLineToURL(fileURL: URL) throws {
-            try (self + "\n").appendToURL(fileURL: fileURL)
-        }
-        
-        func appendToURL(fileURL: URL) throws {
-            let data = self.data(using: String.Encoding.utf8)!
-            try data.append(fileURL: fileURL)
-        }
+}
+
+
+extension String {
+    func appendLineToURL(fileURL: URL) throws {
+        try (self + "\n").appendToURL(fileURL: fileURL)
     }
     
-    extension Data {
-        func append(fileURL: URL) throws {
-            if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
-                defer {
-                    fileHandle.closeFile()
-                }
-                fileHandle.seekToEndOfFile()
-                var offset = try fileHandle.offset()
-                offset = offset - 2
-                try fileHandle.seek(toOffset: offset)
-                fileHandle.write(self)
+    func appendToURL(fileURL: URL) throws {
+        let data = self.data(using: String.Encoding.utf8)!
+        try data.append(fileURL: fileURL)
+    }
+}
+
+extension Data {
+    func append(fileURL: URL) throws {
+        if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
+            defer {
+                fileHandle.closeFile()
             }
-            else {
-                try write(to: fileURL, options: .atomic)
-            }
+            fileHandle.seekToEndOfFile()
+            var offset = try fileHandle.offset()
+            offset = offset - 2
+            try fileHandle.seek(toOffset: offset)
+            fileHandle.write(self)
+        }
+        else {
+            try write(to: fileURL, options: .atomic)
         }
     }
+}
+
