@@ -21,6 +21,7 @@ jobs:
       
     - name: Commit files
       run: |
+         git remote add origin git@github.com:zijie3/BingWallpaperJson.git
          git config --local user.email "jie_liu3@icloud.com"
          git config --local user.name "Zijie Liu"
          git add .
