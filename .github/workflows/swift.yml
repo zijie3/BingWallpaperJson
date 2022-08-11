@@ -25,6 +25,6 @@ jobs:
          git config --local user.name "Zijie Liu"
          git add .
          git commit -m "Update json"
-         git push origin HEAD:main
+         git push --force origin HEAD:main
 
     
